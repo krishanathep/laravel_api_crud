@@ -35,7 +35,8 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $photo = new Photo($request->all());
+        return response()->json(['name' => 'store', 'payload' => $request->all(), 'status' => $photo->save()]);
     }
 
     /**
@@ -46,7 +47,8 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-        //
+        $photo = Photo::find($id);
+        return response()->json(['name' => 'show', 'id' => $id, 'photo' => $photo]);
     }
 
     /**
@@ -80,6 +82,7 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $photo = Photo::find($id);
+        return response()->json(['name' => 'destroy', 'status' => $photo->delete(), 'id' => $id]);
     }
 }
